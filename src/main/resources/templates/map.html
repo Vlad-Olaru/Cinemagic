@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <th:block th:include="common/meta :: common-meta" />
+        <th:block th:include="common/assets :: common-styles" />
+        <link rel="shortcut icon" type="image/x-icon" href="/static/images/fave-icon.png" />
+        <script type="application/x-javascript">
+            addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+        </script>
+        <link href="/static/css/mapping.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/static/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/simptip-mini.css" media="screen,projection" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+        <title>Cinemagic</title>
+    </head>
+    <body>
+        <input type="hidden" id="occupiedSeats" name="occupiedSeats" th:value="${occupiedSeats}"/>
+        <div class="top-header">
+            <div class="logo">
+                <a href="/home"><span> </span>CineMagia</a>
+            </div>
+            <div class="top-nav">
+                <ul>
+                    <li class="active"><a href="/home" class="scroll">Home</a></li>
+                    <div class="clear"> </div>
+                </ul>
+            </div>
+            <div class="clear"> </div>
+        </div>
+        <div class = "col-xs-6"></div>
+        <div class = "col-xs-6">
+            <div class = "col-xs-4">
+                <p>Select time:</p>
+            </div>
+            <div class="col-xs-8">
+                <select class="form-control selector" id="my_selection">
+                    <option th:each="timeTableAvailableTime : ${timeTableAvailableTimes}" th:value="${timeTableAvailableTime}" th:text="${timeTableAvailableTime}"
+                            th:href="${timeTableService.findByMovieAndStartingTime(timeTable.movie, timeTableAvailableTime).id}"></option>
+                </select>
+            </div>
+        </div>
+        <script>
+            document.getElementById('my_selection').onchange = function() {
+                window.location.href = this.children[this.selectedIndex].getAttribute('href');
+            }
+        </script>
+
+        <h1 th:text="'Book tickets for hour ' + ${timeTable.startingTime}">Current time</h1>
+        <form th:action="'/map/' + ${timeTable.id}" method="POST">
+            <div class="col-xs-6">
+                <div class="demo">
+                    <div id="seat-map">
+                        <div class="front">SCREEN</div>
+                    </div>
+                    <div class="booking-details">
+                        <p>Seat: </p>
+                        <ul id="selected-seats"></ul>
+                        <p>Tickets: <span id="counter">0</span></p>
+                        <p>Total: <b>RON<span id="total">0</span></b></p>
+
+                        <button class="checkout-button" type="button">BUY</button>
+
+                        <div id="legend"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-xs-6">
+                <style>
+                    select.form-control.selector {
+                        margin-bottom: 50px;
+                    }
+                    img {
+                        height: 250px;
+                        float: left;
+                        border: 1px solid black;
+                        margin-right: 15px;
+                    }
+                    p {
+                        font-size:28px;
+                    }
+                    h1 {
+                        font-size: 50px;
+                        font-weight: 700;
+                    }
+                </style>
+                <img class="media-object" th:src="'/static/images/movie-images/covers/' + ${timeTable.movie.pictureName} + '.jpg'" />
+                <h1 class="media-heading" th:text="${timeTable.movie.movieName}">Movie Name</h1>
+                <p class="media-paragraph" th:text="${timeTable.movie.movieDescription}">Movie Description</p>
+        </div>
+        <th:block th:include="common/assets :: common-scripts" />
+        <script src="/static/js/jquery.seat-charts.min.js"></script>
+        <script src="/static/js/seats.js"></script>
+    </body>
+</html>

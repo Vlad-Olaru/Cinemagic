@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <th:block th:include="common/meta :: common-meta" />
+        <th:block th:include="common/assets :: common-styles" />
+        <title>Cinemagic</title>
+        <link rel="stylesheet" href="/static/css/login.css"/>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <h1>Create admin</h1>
+                <form class="form" th:action="@{/createAdmin}" th:object="${user}" method = "post">
+                    <input type="text" placeholder="Username" name="username" th:field="*{userName}"/>
+                    <input type="password" placeholder="Password" name="password" th:field="*{password}"/>
+                    <button type="submit" id="login-button">Create</button>
+                </form>
+            </div>
+
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    <th:block th:include="common/assets :: common-scripts" />
+    <script src="/static/js/login.js"></script>
+    </body>
+</html>
