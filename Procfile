@@ -1,1 +1,1 @@
-web: java -jar target\CinemaMagic-1.0-SNAPSHOT.jar 
+web: java -jar target/CinemaMagic-1.0-SNAPSHOT.jar
