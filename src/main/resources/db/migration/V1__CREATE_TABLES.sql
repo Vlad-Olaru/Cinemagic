@@ -1,15 +1,15 @@
-CREATE TABLE `cinemagic`.`users` (
+CREATE TABLE `heroku_3e8e52ec0fc5305`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `user_name` VARCHAR(45) NOT NULL COMMENT '',
   `password` VARCHAR(255) NOT NULL COMMENT '',
   `role` VARCHAR(45) NULL DEFAULT 'ROLE_ADMIN' COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '');
 
-CREATE TABLE `cinemagic`.`movies` (
+CREATE TABLE `heroku_3e8e52ec0fc5305`.`movies` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `movie_name` VARCHAR(255) NOT NULL COMMENT '',
   `movie_description` VARCHAR(1023) NULL COMMENT '',
   `genre` VARCHAR(45) NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '');
-ALTER TABLE `cinemagic`.`movies`
+ALTER TABLE `heroku_3e8e52ec0fc5305`.`movies`
   ADD COLUMN `picture_name` VARCHAR(45) NOT NULL COMMENT '' AFTER `genre`;
